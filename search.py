@@ -193,8 +193,37 @@ def nullHeuristic(state, problem=None):
 
 def greedySearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest heuristic first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    
+    final_path = []
+    explored = []
+    frontier = util.PriorityQueue()
+    
+    curr_state = problem.getStartState()
+    
+    frontier.push((curr_state, []), heuristic(curr_state, problem))
+
+    while True:
+        if frontier.isEmpty():
+            break
+        
+        curr_state, path = frontier.pop()
+
+        if problem.isGoalState(curr_state):
+            final_path = path
+            break
+        
+        if curr_state in explored:
+            continue
+
+        explored = explored + [curr_state]
+
+        for child in problem.getSuccessors(curr_state):
+            if child[0] not in explored:
+                frontier.push((child[0], path + [child[1]]), heuristic(child[0], problem))
+
+    return final_path
+
+    
 
 
 def aStarSearch(problem, heuristic=nullHeuristic):
