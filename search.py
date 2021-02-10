@@ -87,8 +87,23 @@ def depthFirstSearch(problem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    def runDfs(state, path, visited):
+        children_states = problem.getSuccessors(state[0])
+        for child in children_states:
+            if (child[0] not in visited and child[0] != problem.getStartState()):
+
+                if problem.isGoalState(child[0]):
+                    return (True, path + [child[1]])
+
+                reached_goal, childPath = runDfs(child, path + [child[1]], visited + [child[0]])
+                if reached_goal:
+                    return (True, childPath)
+        
+        return (False, path)
+
+    _, path = runDfs((problem.getStartState(), '', 0), list(), list())
+    return path
 
 
 def breadthFirstSearch(problem):
