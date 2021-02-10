@@ -181,7 +181,6 @@ def uniformCostSearch(problem):
 
     return final_path
 
-    
 
 
 def nullHeuristic(state, problem=None):
