@@ -109,7 +109,7 @@ def depthFirstSearch(problem):
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     
-    solution = []
+    final_path = []
     explored = []
     frontier = util.Queue()
     
@@ -123,7 +123,7 @@ def breadthFirstSearch(problem):
         curr_state, path = frontier.pop()
 
         if problem.isGoalState(curr_state):
-            solution = path
+            final_path = path
             break
 
         explored = explored + [curr_state]
@@ -133,7 +133,7 @@ def breadthFirstSearch(problem):
                 frontier.push((child[0], path + [child[1]]))
                 explored = explored + [child[0]]
 
-    return solution
+    return final_path
 
 
 
