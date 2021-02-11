@@ -228,8 +228,42 @@ def greedySearch(problem, heuristic=nullHeuristic):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    curr_state = problem.getStartState()
+    fn = 0 + heuristic(curr_state, problem)
+    
+    isInOpen = util.Counter()
+    open = util.PriorityQueue()
+    
+    open.push((curr_state, [], 0), fn)
+    isInOpen[curr_state] = 1
+
+    closed = []
+
+    while not open.isEmpty():
+        curr_state, path, cost = open.pop()
+        isInOpen[curr_state] = 0
+
+        if problem.isGoalState(curr_state):
+            return path
+        
+        if curr_state in closed:
+            continue
+
+        closed = closed + [curr_state]
+
+        for child in problem.getSuccessors(curr_state):
+            if child[0] not in closed:
+                gn = cost + child[2]
+                fn = gn + heuristic(child[0], problem)
+
+                if isInOpen[curr_state] == 0:
+                    open.push((child[0], path + [child[1]], gn), fn)
+                    isInOpen[child[0]] = 1
+                
+                else:
+                    open.update((child[0], path + [child[1]], gn), fn)
+
 
 
 def foodHeuristic(state, problem):
