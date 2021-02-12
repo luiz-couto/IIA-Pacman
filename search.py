@@ -89,20 +89,27 @@ def depthFirstSearch(problem):
     """
 
     def runDfs(state, path, visited):
+
+        if problem.isGoalState(state):
+            return (True, path + state)
+
+        if visited[state[0]] == 1:
+            return (False, path)
+        
+        visited[state[0]] = 1
+
         children_states = problem.getSuccessors(state[0])
         for child in children_states:
-            if (child[0] not in visited and child[0] != problem.getStartState()):
-
+            if visited[child[0]] == 0:
                 if problem.isGoalState(child[0]):
                     return (True, path + [child[1]])
-
-                reached_goal, childPath = runDfs(child, path + [child[1]], visited + [child[0]])
+                reached_goal, childPath = runDfs(child, path + [child[1]], visited)
                 if reached_goal:
                     return (True, childPath)
         
         return (False, path)
 
-    _, path = runDfs((problem.getStartState(), '', 0), list(), list())
+    _, path = runDfs((problem.getStartState(), '', 0), list(), util.Counter())
     return path
 
 
