@@ -1,0 +1,24 @@
+readCommand argv {argv}
+[SearchAgent] using function gs and heuristic foodHeuristic
+[SearchAgent] using problem type FoodSearchProblem
+Path found with total cost of 36 in 0.0 seconds
+Search nodes expanded: 43
+Pacman emerges victorious! Score: 634
+Average Score: 634.0
+Scores:        634.0
+Win Rate:      1/1 (1.00)
+Record:        Win
+Total Time: 5.381676597
+-e 
+readCommand argv {argv}
+[SearchAgent] using function astar and heuristic foodHeuristic
+[SearchAgent] using problem type FoodSearchProblem
+Path found with total cost of 34 in 0.4 seconds
+Search nodes expanded: 779
+Pacman emerges victorious! Score: 636
+Average Score: 636.0
+Scores:        636.0
+Win Rate:      1/1 (1.00)
+Record:        Win
+Total Time: 5.527801852
+-e 

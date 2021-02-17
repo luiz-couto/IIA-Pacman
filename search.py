@@ -302,13 +302,13 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount']
     """
 
-    position, foodGrid = state
+    position, foodList = state
     
     distances = []
     distances_food = [0]
-    for food in foodGrid.asList():
+    for food in foodList.asList():
         distances.append(util.manhattanDistance(position, food))
-        for tofood in foodGrid.asList():
+        for tofood in foodList.asList():
             distances_food.append(util.manhattanDistance(food, tofood))
     
     return min(distances) + max(distances_food) if len(distances) else max(distances_food)
